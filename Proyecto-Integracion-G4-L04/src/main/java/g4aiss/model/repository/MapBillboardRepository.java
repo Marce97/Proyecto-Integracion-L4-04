@@ -2,7 +2,6 @@ package g4aiss.model.repository;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ public class MapBillboardRepository implements BillboardRepository{
 	Map<String, Billboard> billboardMap;
 	Map<String, Film> filmMap;
 	private static MapBillboardRepository instance=null;
-	private int index=0;			// Index to create playlists and songs' identifiers.
+	private int index=0;			// Index to create billboard and films' identifiers.
 	
 	
 	public static MapBillboardRepository getInstance() {
@@ -36,9 +35,9 @@ public class MapBillboardRepository implements BillboardRepository{
 		
 		// Create film
 		Film NinjaTurtles=new Film();
-		NinjaTurtles.setTitle("The Ninja Turtles");
+		NinjaTurtles.setTitle("Las tortugas ninjas");
 		NinjaTurtles.setDirector("Wilfredo");
-		NinjaTurtles.setDuration(Duration.ofMinutes(190));
+		NinjaTurtles.setDuration(Duration.ofMinutes(140));
 		NinjaTurtles.setGenre("Acción");
 		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
 		addFilm(NinjaTurtles);
@@ -46,133 +45,132 @@ public class MapBillboardRepository implements BillboardRepository{
 		Film GodzillaVsKong=new Film();
 		GodzillaVsKong.setTitle("Godzilla vs Kong");
 		GodzillaVsKong.setDirector("Leonardo");
-		GodzillaVsKong.setDuration(Duration.ofMinutes(220));
+		GodzillaVsKong.setDuration(Duration.ofMinutes(130));
 		GodzillaVsKong.setGenre("Acción");
 		GodzillaVsKong.setRelease(LocalDate.of(6, 4, 2021));
 		addFilm(GodzillaVsKong);
 		
-		Film NinjaTurtles=new Film();
-		NinjaTurtles.setTitle("The Ninja Turtles");
-		NinjaTurtles.setDirector("Wilfredo");
-		NinjaTurtles.setDuration(Duration.ofMinutes(190));
-		NinjaTurtles.setGenre("Acción");
-		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
-		addFilm(NinjaTurtles);
+		Film Titanic=new Film();
+		Titanic.setTitle("Titanic");
+		Titanic.setDirector("Annabel");
+		Titanic.setDuration(Duration.ofMinutes(200));
+		Titanic.setGenre("Romance");
+		Titanic.setRelease(LocalDate.of(4, 6, 1995));
+		addFilm(Titanic);
 		
-		Film NinjaTurtles=new Film();
-		NinjaTurtles.setTitle("The Ninja Turtles");
-		NinjaTurtles.setDirector("Wilfredo");
-		NinjaTurtles.setDuration(Duration.ofMinutes(190));
-		NinjaTurtles.setGenre("Acción");
-		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
-		addFilm(NinjaTurtles);
+		Film ElSeñorDeLosAnillos=new Film();
+		ElSeñorDeLosAnillos.setTitle("El Señor De Los Anillos");
+		ElSeñorDeLosAnillos.setDirector("Peter Jackson");
+		ElSeñorDeLosAnillos.setDuration(Duration.ofMinutes(210));
+		ElSeñorDeLosAnillos.setGenre("Aventura");
+		ElSeñorDeLosAnillos.setRelease(LocalDate.of(15, 10, 1997));
+		addFilm(ElSeñorDeLosAnillos);
 		
-		Film NinjaTurtles=new Film();
-		NinjaTurtles.setTitle("The Ninja Turtles");
-		NinjaTurtles.setDirector("Wilfredo");
-		NinjaTurtles.setDuration(Duration.ofMinutes(190));
-		NinjaTurtles.setGenre("Acción");
-		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
-		addFilm(NinjaTurtles);
+		Film Avatar=new Film();
+		Avatar.setTitle("Avatar");
+		Avatar.setDirector("Isaac");
+		Avatar.setDuration(Duration.ofMinutes(210));
+		Avatar.setGenre("Fanatasía");
+		Avatar.setRelease(LocalDate.of(7, 1, 2004));
+		addFilm(Avatar);
 		
-		// Create playlists
-		Playlist japlaylist=new Playlist();
-		japlaylist.setName("AISSPlayList");
-		japlaylist.setDescription("AISS PlayList");
-		addPlaylist(japlaylist);
+		// Create Billboard
+		Billboard carteleraModerna=new Billboard();
+		carteleraModerna.setName("AISSPlayList");
+		carteleraModerna.setLocation("AISS PlayList");
+		addBillboard(carteleraModerna);
 		
-		Playlist playlist = new Playlist();
-		playlist.setName("Favourites");
-		playlist.setDescription("A sample playlist");
-		addPlaylist(playlist);
+		Billboard carteleraVintage = new Billboard();
+		carteleraVintage.setName("Cartelera vintage");
+		carteleraVintage.setLocation("Nervion");
+		addBillboard(carteleraVintage);
 		
-		// Add songs to playlists
-		addSong(japlaylist.getId(), rollingInTheDeep.getId());
-		addSong(japlaylist.getId(), one.getId());
-		addSong(japlaylist.getId(), smellLikeTeenSpirit.getId());
-		addSong(japlaylist.getId(), losingMyReligion.getId());
-		
-		addSong(playlist.getId(), losingMyReligion.getId());
-		addSong(playlist.getId(), gotye.getId());
+		// Add songs to Billboard
+		addFilm(carteleraModerna.getId(), NinjaTurtles.getId());
+		addFilm(carteleraModerna.getId(), GodzillaVsKong.getId());
+		addFilm(carteleraVintage.getId(), Titanic.getId());
+		addFilm(carteleraVintage.getId(), ElSeñorDeLosAnillos.getId());
+		addFilm(carteleraVintage.getId(), Avatar.getId());
 	}
 	
-	// Playlist related operations
+	// Billboard related operations
 	@Override
-	public void addPlaylist(Playlist p) {
-		String id = "p" + index++;	
-		p.setId(id);
-		playlistMap.put(id,p);
+	public void addBillboard(Billboard b) {
+		String id = "b" + index++;	
+		b.setId(id);
+		billboardMap.put(id,b);
 	}
 	
 	@Override
-	public Collection<Playlist> getAllPlaylists() {
-			return playlistMap.values();
+	public Collection<Billboard> getAllBillboards() {
+			return billboardMap.values();
 	}
 
 	@Override
-	public Playlist getPlaylist(String id) {
-		return playlistMap.get(id);
+	public Billboard getBillboard(String id) {
+		return billboardMap.get(id);
 	}
 	
 	@Override
-	public void updatePlaylist(Playlist p) {
-		playlistMap.put(p.getId(),p);
+	public void updateBillboard(Billboard p) {
+		billboardMap.put(p.getId(),p);
 	}
 
 	@Override
-	public void deletePlaylist(String id) {	
-		playlistMap.remove(id);
+	public void deleteBillboard(String id) {	
+		billboardMap.remove(id);
 	}
 	
 
 	@Override
-	public void addSong(String playlistId, String songId) {
-		Playlist playlist = getPlaylist(playlistId);
-		playlist.addSong(songMap.get(songId));
+	public void addFilm(String billboardId, String filmId) {
+		Billboard playlist = getBillboard(billboardId);
+		playlist.addFilm(filmMap.get(filmId));
 	}
 
 	@Override
-	public Collection<Song> getAll(String playlistId) {
-		return getPlaylist(playlistId).getSongs();
+	public Collection<Film> getAll(String playlistId) {
+		return getBillboard(playlistId).getFilms();
 	}
 
 	@Override
-	public void removeSong(String playlistId, String songId) {
-		getPlaylist(playlistId).deleteSong(songId);
+	public void removeFilm(String playlistId, String filmId) {
+		getBillboard(playlistId).deleteFilm(filmId);
 	}
 
 	
 	// Song related operations
 	
 	@Override
-	public void addSong(Song s) {
+	public void addFilm(Film s) {
 		String id = "s" + index++;
 		s.setId(id);
-		songMap.put(id, s);
+		filmMap.put(id, s);
 	}
 	
 	@Override
-	public Collection<Song> getAllSongs() {
-			return songMap.values();
+	public Collection<Film> getAllFilms() {
+			return filmMap.values();
 	}
 
 	@Override
-	public Song getSong(String songId) {
-		return songMap.get(songId);
+	public Film getFilm(String songId) {
+		return filmMap.get(songId);
 	}
 
 	@Override
-	public void updateSong(Song s) {
-		Song song = songMap.get(s.getId());
-		song.setTitle(s.getTitle());
-		song.setAlbum(s.getAlbum());
-		song.setArtist(s.getArtist());
-		song.setYear(s.getYear());
+	public void updateFilm(Film s) {
+		Film Film = filmMap.get(s.getId());
+		Film.setTitle(s.getTitle());
+		Film.setDirector(s.getDirector());
+		Film.setDuration(s.getDuration());
+		Film.setGenre(s.getGenre());
+		Film.setRelease(s.getRelease());
 	}
 
 	@Override
-	public void deleteSong(String songId) {
-		songMap.remove(songId);
+	public void deleteFilm(String songId) {
+		filmMap.remove(songId);
 	}
 	
 }

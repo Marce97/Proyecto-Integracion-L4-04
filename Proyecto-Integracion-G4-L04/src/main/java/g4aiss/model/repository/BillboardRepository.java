@@ -7,7 +7,7 @@ import g4aiss.model.Film;
 
 public interface BillboardRepository {
 		
-		//Films
+		//Films 
 		public void addFilm(Film f);
 		public Collection<Film> getAllFilms();
 		public Film getFilm(String filmId);
@@ -20,9 +20,9 @@ public interface BillboardRepository {
 		public Billboard getBillboard(String billboardId);
 		public void updateBillboard(Billboard b);
 		public void deleteBillboard(String billboardId);
-		public Collection<Billboard> getAll(String billboardId);
-		public void addBillboard(String billboardId, String filmId);
-		public void removeBillboard(String billboardId, String filmId);
+		public Collection<Film> getAll(String billboardId);
+		public void addFilm(String billboardId, String filmId);
+		public void removeFilm(String billboardId, String filmId);
 
 	}
 
