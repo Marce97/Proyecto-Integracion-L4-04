@@ -51,14 +51,14 @@ import g4aiss.model.repository.MapBillboardRepository;
 		
 		
 		@GET
-		@Path("/{title}")
+		@Path("/{id}")
 		@Produces("application/json")
-		public Billboard get(@PathParam("title") String filmTitle)
+		public Billboard get(@PathParam("id") String id)
 		{
-			Billboard b = repository.getBillboard(filmTitle);
+			Billboard b = repository.getBillboard(id);
 			
 			if(b == null) {
-				throw new NotFoundException("The film with title="+ filmTitle +" was not found");	
+				throw new NotFoundException("The film with id="+ id +" was not found");	
 			}
 			
 			return b;
@@ -67,55 +67,100 @@ import g4aiss.model.repository.MapBillboardRepository;
 		@POST
 		@Consumes("application/json")
 		@Produces("application/json")
-		public Response addFilm(@Context UriInfo uriInfo, Film film) {
-			if(film.getTitle() == null || "".equals(song.getTitle())) {
-				throw new BadRequestException("The name of the song must not be null");
+		public Response addBillboard(@Context UriInfo uriInfo, Billboard billboard) {
+			if(billboard.getName() == null || "".equals(billboard.getName())) {
+				throw new BadRequestException("The name of the billboard must not be null");
 			}
 			
-			repository.addSong(song);
+			repository.addBillboard(billboard);
 			
 			UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
-			URI uri = ub.build(song.getId());
+			URI uri = ub.build(billboard.getId());
 			ResponseBuilder resp = Response.created(uri);
-			resp.entity(song);			
+			resp.entity(billboard);			
 			return resp.build();
 		}
 			
 		
 		@PUT
 		@Consumes("application/json")
-		public Response updateFilm(Film film) {
-			Film oldfilm = repository.getFilm(film.get());
-			if (oldfilm == null) {
-				throw new NotFoundException("The billboard with name="+ film.getId() +" was not found");			
+		public Response updateBillboard(Billboard billboard) {
+			Billboard oldbillboard = repository.getBillboard(billboard.getId());
+			if (oldbillboard == null) {
+				throw new NotFoundException("The billboard with id="+ billboard.getId() +" was not found");			
 			}
 			
+			
+			if (billboard.getFilms()!=null)
+				throw new BadRequestException("The films property is not editable.");
+			
 			// Update name
-			if (song.getTitle()!=null)
-				oldsong.setTitle(song.getTitle());
+			if(billboard.getName()!=null)
+				oldbillboard.setName(billboard.getName());
 			
-			if(song.getArtist()!=null)
-				oldsong.setArtist(song.getArtist());
-			
-			if(song.getAlbum()!=null)
-				oldsong.setAlbum(song.getAlbum());
-			
-			if(song.getYear()!=null)
-				oldsong.setYear(song.getYear());
+			if(billboard.getLocation()!=null)
+				oldbillboard.setLocation(billboard.getLocation());
 			
 			return Response.noContent().build();
 		}
 		
 		@DELETE
 		@Path("/{id}")
-		public Response removeSong(@PathParam("id") String songId) {
-			Song toberemoved=repository.getSong(songId);
+		public Response removeBillboard(@PathParam("id") String id) {
+			Billboard toberemoved=repository.getBillboard(id);
 	        if (toberemoved == null)
-	            throw new NotFoundException("The song with id="+ songId +" was not found");
+	            throw new NotFoundException("The billboard with id="+ id +" was not found");
 	        else
-	            repository.deleteSong(songId);
+	            repository.deleteBillboard(id);
 
 	        return Response.noContent().build();
+		}
+		@POST	
+		@Path("/{playlistId}/{songId}")
+		@Consumes("text/plain")
+		@Produces("application/json")
+		public Response addFilm(@Context UriInfo uriInfo,@PathParam("billboardId") String billboardId, @PathParam("filmId") String filmId)
+		{				
+			
+			Billboard billboard = repository.getBillboard(billboardId);
+			Film film = repository.getFilm(filmId);
+			
+			if (billboard==null)
+				throw new NotFoundException("The billboard with id=" + billboardId + " was not found");
+			
+			if (film == null)
+				throw new NotFoundException("The film with id=" + filmId + " was not found");
+			
+			if (billboard.getFilm(filmId)!=null)
+				throw new BadRequestException("The film is already included in the billboard.");
+				
+			repository.addFilm(billboardId, filmId);		
+
+			// Builds the response
+			UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
+			URI uri = ub.build(billboardId);
+			ResponseBuilder resp = Response.created(uri);
+			resp.entity(billboard);			
+			return resp.build();
+		}
+		
+		
+		@DELETE
+		@Path("/{playlistId}/{songId}")
+		public Response removeFilm(@PathParam("billboardId") String billboardId, @PathParam("filmId") String filmId) {
+			Billboard billboard = repository.getBillboard(billboardId);
+			Film film = repository.getFilm(filmId);
+			
+			if (billboard==null)
+				throw new NotFoundException("The billboard with id=" + billboardId + " was not found");
+			
+			if (film == null)
+				throw new NotFoundException("The film with id=" + filmId + " was not found");
+			
+			
+			repository.removeFilm(billboardId, filmId);		
+			
+			return Response.noContent().build();
 		}
 		
 	}

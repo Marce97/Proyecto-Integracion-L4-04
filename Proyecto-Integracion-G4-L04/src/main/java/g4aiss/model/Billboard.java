@@ -7,7 +7,7 @@ public class Billboard {
 
 	private String id;
 	private String name;
-	private String location; // ¿Tipo location? Mirar bien
+	private String location; 
 	private List<Film> films;
 
 	public Billboard() {
