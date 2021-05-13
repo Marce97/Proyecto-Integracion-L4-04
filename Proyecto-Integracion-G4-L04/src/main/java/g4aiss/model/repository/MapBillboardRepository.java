@@ -2,7 +2,6 @@ package g4aiss.model.repository;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ public class MapBillboardRepository implements BillboardRepository{
 	Map<String, Billboard> billboardMap;
 	Map<String, Film> filmMap;
 	private static MapBillboardRepository instance=null;
-	private int index=0;			// Index to create playlists and songs' identifiers.
+	private int index=0;			// Index to create billboard and songs' identifiers.
 	
 	
 	public static MapBillboardRepository getInstance() {
@@ -103,7 +102,7 @@ public class MapBillboardRepository implements BillboardRepository{
 	}
 	
 	@Override
-	public Collection<Billboard> getBillboards() {
+	public Collection<Billboard> getAllBillboards() {
 			return billboardMap.values();
 	}
 
@@ -124,53 +123,54 @@ public class MapBillboardRepository implements BillboardRepository{
 	
 
 	@Override
-	public void addBillboard(String billboardId, String filmId) {
+	public void addFilm(String billboardId, String filmId) {
 		Billboard playlist = getBillboard(billboardId);
 		playlist.addFilm(filmMap.get(filmId));
 	}
 
 	@Override
-	public Collection<Song> getAll(String playlistId) {
-		return getPlaylist(playlistId).getSongs();
+	public Collection<Film> getAll(String playlistId) {
+		return getBillboard(playlistId).getFilms();
 	}
 
 	@Override
-	public void removeSong(String playlistId, String songId) {
-		getPlaylist(playlistId).deleteSong(songId);
+	public void removeFilm(String playlistId, String filmId) {
+		getBillboard(playlistId).deleteFilm(filmId);
 	}
 
 	
 	// Song related operations
 	
 	@Override
-	public void addSong(Song s) {
+	public void addFilm(Film s) {
 		String id = "s" + index++;
 		s.setId(id);
-		songMap.put(id, s);
+		filmMap.put(id, s);
 	}
 	
 	@Override
-	public Collection<Song> getAllSongs() {
-			return songMap.values();
+	public Collection<Film> getAllFilms() {
+			return filmMap.values();
 	}
 
 	@Override
-	public Song getSong(String songId) {
-		return songMap.get(songId);
+	public Film getFilm(String songId) {
+		return filmMap.get(songId);
 	}
 
 	@Override
-	public void updateSong(Song s) {
-		Song song = songMap.get(s.getId());
-		song.setTitle(s.getTitle());
-		song.setAlbum(s.getAlbum());
-		song.setArtist(s.getArtist());
-		song.setYear(s.getYear());
+	public void updateFilm(Film s) {
+		Film Film = filmMap.get(s.getId());
+		Film.setTitle(s.getTitle());
+		Film.setDirector(s.getDirector());
+		Film.setDuration(s.getDuration());
+		Film.setGenre(s.getGenre());
+		Film.setRelease(s.getRelease());
 	}
 
 	@Override
-	public void deleteSong(String songId) {
-		songMap.remove(songId);
+	public void deleteFilm(String songId) {
+		filmMap.remove(songId);
 	}
 	
 }

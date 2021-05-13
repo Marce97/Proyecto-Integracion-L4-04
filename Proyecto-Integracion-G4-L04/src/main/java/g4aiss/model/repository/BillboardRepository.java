@@ -16,13 +16,13 @@ public interface BillboardRepository {
 		
 		// Billboards
 		public void addBillboard(Billboard b);
-		public Collection<Billboard> getBillboards();
+		public Collection<Billboard> getAllBillboards();
 		public Billboard getBillboard(String billboardId);
 		public void updateBillboard(Billboard b);
 		public void deleteBillboard(String billboardId);
-		public Collection<Billboard> getAll(String billboardId);
-		public void addBillboard(String billboardId, String filmId);
-		public void removeBillboard(String billboardId, String filmId);
+		public Collection<Film> getAll(String billboardId);
+		public void addFilm(String billboardId, String filmId);
+		public void removeFilm(String billboardId, String filmId);
 
 	}
 
