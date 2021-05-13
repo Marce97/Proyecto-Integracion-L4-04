@@ -16,7 +16,7 @@ public interface BillboardRepository {
 		
 		// Billboards
 		public void addBillboard(Billboard b);
-		public Collection<Billboard> getBillboards();
+		public Collection<Billboard> getAllBillboards();
 		public Billboard getBillboard(String billboardId);
 		public void updateBillboard(Billboard b);
 		public void deleteBillboard(String billboardId);

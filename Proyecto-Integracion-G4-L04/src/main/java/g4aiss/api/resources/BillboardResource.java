@@ -21,6 +21,7 @@ import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
 
 import g4aiss.model.Billboard;
+import g4aiss.model.Film;
 import g4aiss.model.repository.BillboardRepository;
 import g4aiss.model.repository.MapBillboardRepository;
 	
@@ -50,24 +51,24 @@ import g4aiss.model.repository.MapBillboardRepository;
 		
 		
 		@GET
-		@Path("/{id}")
+		@Path("/{title}")
 		@Produces("application/json")
-		public Song get(@PathParam("id") String songId)
+		public Billboard get(@PathParam("title") String filmTitle)
 		{
-			Song s = repository.getSong(songId);
+			Billboard b = repository.getBillboard(filmTitle);
 			
-			if(s == null) {
-				throw new NotFoundException("The song with id="+ songId +" was not found");	
+			if(b == null) {
+				throw new NotFoundException("The film with title="+ filmTitle +" was not found");	
 			}
 			
-			return s;
+			return b;
 		}
 		
 		@POST
 		@Consumes("application/json")
 		@Produces("application/json")
-		public Response addSong(@Context UriInfo uriInfo, Song song) {
-			if(song.getTitle() == null || "".equals(song.getTitle())) {
+		public Response addFilm(@Context UriInfo uriInfo, Film film) {
+			if(film.getTitle() == null || "".equals(song.getTitle())) {
 				throw new BadRequestException("The name of the song must not be null");
 			}
 			
@@ -83,10 +84,10 @@ import g4aiss.model.repository.MapBillboardRepository;
 		
 		@PUT
 		@Consumes("application/json")
-		public Response updateSong(Song song) {
-			Song oldsong = repository.getSong(song.getId());
-			if (oldsong == null) {
-				throw new NotFoundException("The playlist with id="+ song.getId() +" was not found");			
+		public Response updateFilm(Film film) {
+			Film oldfilm = repository.getFilm(film.get());
+			if (oldfilm == null) {
+				throw new NotFoundException("The billboard with name="+ film.getId() +" was not found");			
 			}
 			
 			// Update name
