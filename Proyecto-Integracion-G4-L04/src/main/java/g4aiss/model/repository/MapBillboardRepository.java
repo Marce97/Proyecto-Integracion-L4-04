@@ -1,5 +1,8 @@
 package g4aiss.model.repository;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +19,10 @@ public class MapBillboardRepository implements BillboardRepository{
 	private int index=0;			// Index to create playlists and songs' identifiers.
 	
 	
-	public static MapPlaylistRepository getInstance() {
+	public static MapBillboardRepository getInstance() {
 		
 		if (instance==null) {
-			instance = new MapPlaylistRepository();
+			instance = new MapBillboardRepository();
 			instance.init();
 		}
 		
@@ -28,44 +31,49 @@ public class MapBillboardRepository implements BillboardRepository{
 	
 	public void init() {
 		
-		playlistMap = new HashMap<String,Playlist>();
-		songMap = new HashMap<String,Song>();
+		billboardMap = new HashMap<String,Billboard>();
+		filmMap = new HashMap<String,Film>();
 		
-		// Create songs
-		Song rollingInTheDeep=new Song();
-		rollingInTheDeep.setTitle("Rolling in the Deep");
-		rollingInTheDeep.setArtist("Adele");
-		rollingInTheDeep.setYear("2011");
-		rollingInTheDeep.setAlbum("21");
-		addSong(rollingInTheDeep);
+		// Create film
+		Film NinjaTurtles=new Film();
+		NinjaTurtles.setTitle("The Ninja Turtles");
+		NinjaTurtles.setDirector("Wilfredo");
+		NinjaTurtles.setDuration(Duration.ofMinutes(190));
+		NinjaTurtles.setGenre("Acción");
+		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
+		addFilm(NinjaTurtles);
 		
-		Song one=new Song();
-		one.setTitle("One");
-		one.setArtist("U2");
-		one.setYear("1992");
-		one.setAlbum("Achtung Baby");
-		addSong(one);
+		Film GodzillaVsKong=new Film();
+		GodzillaVsKong.setTitle("Godzilla vs Kong");
+		GodzillaVsKong.setDirector("Leonardo");
+		GodzillaVsKong.setDuration(Duration.ofMinutes(220));
+		GodzillaVsKong.setGenre("Acción");
+		GodzillaVsKong.setRelease(LocalDate.of(6, 4, 2021));
+		addFilm(GodzillaVsKong);
 		
-		Song losingMyReligion=new Song();
-		losingMyReligion.setTitle("Losing my Religion");
-		losingMyReligion.setArtist("REM");
-		losingMyReligion.setYear("1991");
-		losingMyReligion.setAlbum("Out of Time");
-		addSong(losingMyReligion);
+		Film NinjaTurtles=new Film();
+		NinjaTurtles.setTitle("The Ninja Turtles");
+		NinjaTurtles.setDirector("Wilfredo");
+		NinjaTurtles.setDuration(Duration.ofMinutes(190));
+		NinjaTurtles.setGenre("Acción");
+		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
+		addFilm(NinjaTurtles);
 		
-		Song smellLikeTeenSpirit=new Song();
-		smellLikeTeenSpirit.setTitle("Smell Like Teen Spirit");
-		smellLikeTeenSpirit.setArtist("Nirvana");
-		smellLikeTeenSpirit.setAlbum("Nevermind");
-		smellLikeTeenSpirit.setYear("1991");
-		addSong(smellLikeTeenSpirit);
+		Film NinjaTurtles=new Film();
+		NinjaTurtles.setTitle("The Ninja Turtles");
+		NinjaTurtles.setDirector("Wilfredo");
+		NinjaTurtles.setDuration(Duration.ofMinutes(190));
+		NinjaTurtles.setGenre("Acción");
+		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
+		addFilm(NinjaTurtles);
 		
-		Song gotye=new Song();
-		gotye.setTitle("Someone that I used to know");
-		gotye.setArtist("Gotye");
-		gotye.setYear("2011");
-		gotye.setAlbum("Making Mirrors");
-		addSong(gotye);
+		Film NinjaTurtles=new Film();
+		NinjaTurtles.setTitle("The Ninja Turtles");
+		NinjaTurtles.setDirector("Wilfredo");
+		NinjaTurtles.setDuration(Duration.ofMinutes(190));
+		NinjaTurtles.setGenre("Acción");
+		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
+		addFilm(NinjaTurtles);
 		
 		// Create playlists
 		Playlist japlaylist=new Playlist();
