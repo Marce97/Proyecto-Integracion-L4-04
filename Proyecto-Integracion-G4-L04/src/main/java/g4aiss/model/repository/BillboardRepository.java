@@ -7,7 +7,7 @@ import g4aiss.model.Film;
 
 public interface BillboardRepository {
 		
-		// Films
+		//Films
 		public void addFilm(Film f);
 		public Collection<Film> getAllFilms();
 		public Film getFilm(String filmId);

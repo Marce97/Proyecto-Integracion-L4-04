@@ -23,7 +23,7 @@ import g4aiss.model.Film;
 import g4aiss.model.repository.BillboardRepository;
 import g4aiss.model.repository.MapBillboardRepository;
 
-
+//prueba commit
 @Path("/films")
 public class FilmResource {
 
