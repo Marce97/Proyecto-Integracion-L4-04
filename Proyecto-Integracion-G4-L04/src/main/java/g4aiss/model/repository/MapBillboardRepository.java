@@ -15,7 +15,7 @@ public class MapBillboardRepository implements BillboardRepository{
 	Map<String, Billboard> billboardMap;
 	Map<String, Film> filmMap;
 	private static MapBillboardRepository instance=null;
-	private int index=0;			// Index to create billboard and songs' identifiers.
+	private int index=0;			// Index to create billboard and films' identifiers.
 	
 	
 	public static MapBillboardRepository getInstance() {
