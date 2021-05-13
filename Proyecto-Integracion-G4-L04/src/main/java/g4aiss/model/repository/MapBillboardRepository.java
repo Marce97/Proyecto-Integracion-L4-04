@@ -76,8 +76,8 @@ public class MapBillboardRepository implements BillboardRepository{
 		
 		// Create Billboard
 		Billboard carteleraModerna=new Billboard();
-		carteleraModerna.setName("AISSPlayList");
-		carteleraModerna.setLocation("AISS PlayList");
+		carteleraModerna.setName("Cartelera moderna");
+		carteleraModerna.setLocation("Lagoh");
 		addBillboard(carteleraModerna);
 		
 		Billboard carteleraVintage = new Billboard();
