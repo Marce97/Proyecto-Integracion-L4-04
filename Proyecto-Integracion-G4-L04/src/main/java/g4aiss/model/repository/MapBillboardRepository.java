@@ -37,41 +37,41 @@ public class MapBillboardRepository implements BillboardRepository{
 		Film NinjaTurtles=new Film();
 		NinjaTurtles.setTitle("Las tortugas ninjas");
 		NinjaTurtles.setDirector("Wilfredo");
-		NinjaTurtles.setDuration(Duration.ofMinutes(140));
+		NinjaTurtles.setDuration(140);
 		NinjaTurtles.setGenre("Acción");
-		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
+		NinjaTurtles.setRelease("2021, 10, 5");
 		addFilm(NinjaTurtles);
 		
 		Film GodzillaVsKong=new Film();
 		GodzillaVsKong.setTitle("Godzilla vs Kong");
 		GodzillaVsKong.setDirector("Leonardo");
-		GodzillaVsKong.setDuration(Duration.ofMinutes(130));
+		GodzillaVsKong.setDuration(130);
 		GodzillaVsKong.setGenre("Acción");
-		GodzillaVsKong.setRelease(LocalDate.of(6, 4, 2021));
+		GodzillaVsKong.setRelease("2021, 4, 20");
 		addFilm(GodzillaVsKong);
 		
 		Film Titanic=new Film();
 		Titanic.setTitle("Titanic");
 		Titanic.setDirector("Annabel");
-		Titanic.setDuration(Duration.ofMinutes(200));
+		Titanic.setDuration(200);
 		Titanic.setGenre("Romance");
-		Titanic.setRelease(LocalDate.of(4, 6, 1995));
+		Titanic.setRelease("1995, 12, 28");
 		addFilm(Titanic);
 		
 		Film ElSeñorDeLosAnillos=new Film();
 		ElSeñorDeLosAnillos.setTitle("El Señor De Los Anillos");
 		ElSeñorDeLosAnillos.setDirector("Peter Jackson");
-		ElSeñorDeLosAnillos.setDuration(Duration.ofMinutes(210));
+		ElSeñorDeLosAnillos.setDuration(210);
 		ElSeñorDeLosAnillos.setGenre("Aventura");
-		ElSeñorDeLosAnillos.setRelease(LocalDate.of(15, 10, 1997));
+		ElSeñorDeLosAnillos.setRelease("1997, 4, 17");
 		addFilm(ElSeñorDeLosAnillos);
 		
 		Film Avatar=new Film();
 		Avatar.setTitle("Avatar");
 		Avatar.setDirector("Isaac");
-		Avatar.setDuration(Duration.ofMinutes(210));
+		Avatar.setDuration(210);
 		Avatar.setGenre("Fanatasía");
-		Avatar.setRelease(LocalDate.of(7, 1, 2004));
+		Avatar.setRelease("2004, 7, 17");
 		addFilm(Avatar);
 		
 		// Create Billboard

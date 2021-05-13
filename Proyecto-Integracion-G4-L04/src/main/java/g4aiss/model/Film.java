@@ -1,23 +1,20 @@
 package g4aiss.model;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class Film {
 	
 	private String id;
 	private String title;
 	private String director;
-	private Duration duration;
+	private Integer duration;
 	private String genre;
-	private LocalDate release;
+	private String release;
 	
 	public Film() {
 		super();
 	}
 
-	public Film(String title, String director, Duration duration, String genre, LocalDate release) {
+	public Film(String title, String director, Integer duration, String genre, String release) {
 		this.title = title;
 		this.director = director;
 		this.duration = duration;
@@ -25,7 +22,7 @@ public class Film {
 		this.release = release;
 	}
 	
-	public Film(String id, String title, String director, Duration duration, String genre, LocalDate release) {
+	public Film(String id, String title, String director, Integer duration, String genre, String release) {
 		this.id = id;
 		this.title = title;
 		this.director = director;
@@ -58,11 +55,11 @@ public class Film {
 		this.director = director;
 	}
 
-	public Duration getDuration() {
+	public Integer getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Duration duration) {
+	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
 
@@ -74,11 +71,11 @@ public class Film {
 		this.genre = genre;
 	}
 
-	public LocalDate getRelease() {
+	public String getRelease() {
 		return release;
 	}
 
-	public void setRelease(LocalDate release) {
+	public void setRelease(String release) {
 		this.release = release;
 	}
 	
