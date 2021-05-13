@@ -48,33 +48,40 @@ public class FilmResource {
 		
 		List<Film> result = new ArrayList<Film>();
 		
-		for(Film song: repository.getAllSongs()) {
-			if(q == null || song.getTitle().contains(q) || song.getAlbum().contains(q) || song.getArtist().contains(q)) {
+		for(Film song: repository.getAllFilms()) {
+			if(q == null || song.getTitle().contains(q) || song.getDirector().contains(q) || song.getGenre().contains(q)) {
 				result.add(song);
 			}
 		}
 		
 		if(order != null) {
 			
-			if(order.equals("album")) {
-				Collections.sort(result, new ComparatorAlbumSong());
+			if(order.equals("director")) {
+				Collections.sort(result, new ComparatorDirectorFilm());
 			}
-			else if(order.equals("-album")) {
-				Collections.sort(result, new ComparatorAlbumSongReversed());
-			}
-			
-			else if(order.equals("artist")) {
-				Collections.sort(result, new ComparatorArtistSong());
-			}
-			else if(order.equals("-artist")) {
-				Collections.sort(result, new ComparatorArtistSongReversed());
+			else if(order.equals("-director")) {
+				Collections.sort(result, new ComparatorDirectorFilmReversed());
 			}
 			
-			else if(order.equals("year")) {
-				Collections.sort(result, new ComparatorYearSong());
+			else if(order.equals("duration")) {
+				Collections.sort(result, new ComparatorDurationFilm());
 			}
-			else if(order.equals("-year")) {
-				Collections.sort(result, new ComparatorYearSongReversed());
+			else if(order.equals("-duration")) {
+				Collections.sort(result, new ComparatorDurationFilmReversed());
+			}
+			
+			else if(order.equals("genre")) {
+				Collections.sort(result, new ComparatorGenreFilm());
+			}
+			else if(order.equals("-genre")) {
+				Collections.sort(result, new ComparatorGenreFilmReversed());
+			}
+			
+			else if(order.equals("genre")) {
+				Collections.sort(result, new ComparatorGenreFilm());
+			}
+			else if(order.equals("-genre")) {
+				Collections.sort(result, new ComparatorGenreFilmReversed());
 			}
 			
 			else {
