@@ -3,8 +3,6 @@ package g4aiss.model;
 
 public class Film {
 	
-	//mas id
-	
 	private String id;
 	private String title;
 	private String director;

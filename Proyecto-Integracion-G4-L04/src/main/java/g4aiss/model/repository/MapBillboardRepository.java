@@ -70,7 +70,7 @@ public class MapBillboardRepository implements BillboardRepository{
 		Avatar.setTitle("Avatar");
 		Avatar.setDirector("Isaac");
 		Avatar.setDuration(210);
-		Avatar.setGenre("Fanatasía");
+		Avatar.setGenre("Fantasía");
 		Avatar.setRelease("2004, 7, 17");
 		addFilm(Avatar);
 		
