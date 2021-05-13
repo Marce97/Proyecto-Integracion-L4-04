@@ -1,42 +1,41 @@
 openapi: 3.0.0
-servers:
-  - url: 'http://localhost:8089/api/v1/'
+servers: 'http://localhost:8090/api/'
 info:
-  description: This is a simple API
-  version: 1.0.0-oas3
-  title: PlayList API
+  description: Modify this information
+  version: 1.0.0
+  title: Billboard-API
   contact:
     email: you@your-company.com
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 tags:
-  - name: songs
-    description: Songs
-  - name: lists
-    description: Playlists
+  - name: films
+    description: Films
+  - name: billboard
+    description: Billboard
 paths:
-  /songs:
+  /films:
     get:
       tags:
-        - songs
-      summary: Get songs
-      description: Get all songs
-      operationId: getSongs
+        - films
+      summary: Get films
+      description: Get all films
+      operationId: getFilms
       parameters:
         - name: order
           in: query
-          description: Order results by album, artist or year
+          description: Order results by genre, director or release
           required: false
           schema:
             type: string
             enum:
-              - album
-              - '-album'
-              - artist
-              - '-artist'
-              - year
-              - '-year'
+              - genre
+              - '-genre'
+              - director
+              - '-director'
+              - release
+              - '-release'
         - name: q
           in: query
           description: Query to filter
@@ -75,26 +74,26 @@ paths:
                       type: string
                     title:
                       type: string
-                    artist:
+                    director:
                       type: string
-                    album:
+                    genre:
                       type: string
-                    year:
+                    release:
                       type: string
                   example:
-                    id: s1
-                    title: Rolling in the Deep
-                    artist: Adele
-                    album: '21'
-                    year: '2011'
+                    id: f1
+                    title: Las tortugas ninjas
+                    director: Wilfredo
+                    genre: 'ACCION'
+                    release: '15, 10, 2021'
         '400':
           description: Bad request
     post:
       tags:
-        - songs
-      summary: Create a song
-      description: Create a song
-      operationId: createSong
+        - films
+      summary: Create a film
+      description: Create a film
+      operationId: createFilm
       requestBody:
         content:
           application/json:
@@ -107,23 +106,23 @@ paths:
                   type: string
                 title:
                   type: string
-                artist:
+                director:
                   type: string
-                album:
+                genre:
                   type: string
-                year:
+                release:
                   type: string
               example:
-                id: s1
-                title: Rolling in the Deep
-                artist: Adele
-                album: '21'
-                year: '2011'
-        description: Song to create
+                id: f1
+                title: Las tortugas ninjas
+                director: Wilfredo
+                genre: 'ACCION'
+                release: '15, 10, 2021'
+        description: Film to create
         required: true
       responses:
         '201':
-          description: Song created
+          description: Film created
           content:
             application/json:
               schema:
@@ -135,83 +134,46 @@ paths:
                     type: string
                   title:
                     type: string
-                  artist:
+                  director:
                     type: string
-                  album:
+                  genre:
                     type: string
-                  year:
+                  release:
                     type: string
                 example:
-                  id: s1
-                  title: Rolling in the Deep
-                  artist: Adele
-                  album: '21'
-                  year: '2011'
+                  id: f1
+                  title: Las tortugas ninjas
+                  director: Wilfredo
+                  genre: 'ACCION'
+                  release: '15, 10, 2021'
         '400':
           description: Bad request
-    put:
-      tags:
-        - songs
-      summary: Update a song
-      description: Update a song
-      operationId: updateSong
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - title
-              properties:
-                id:
-                  type: string
-                title:
-                  type: string
-                artist:
-                  type: string
-                album:
-                  type: string
-                year:
-                  type: string
-              example:
-                id: s1
-                title: Rolling in the Deep
-                artist: Adele
-                album: '21'
-                year: '2011'
-      responses:
-        '204':
-          description: Song updated
-        '400':
-          description: Bad request
-        '404':
-          description: Song not found
-  '/songs/{id}':
+  '/films/{id}':
     delete:
       tags:
-        - songs
-      summary: Delete song
-      description: Delete song
-      operationId: deleteSong
+        - films
+      summary: Delete film
+      description: Delete film
+      operationId: deleteFilm
       parameters:
         - name: id
           in: path
-          description: Id of the song
+          description: Id of the film
           required: true
           schema:
             type: string
       responses:
         '204':
-          description: Song deleted
+          description: Film deleted
         '404':
-          description: Song not found
-  /lists:
+          description: Film not found
+  /billboard:
     get:
       tags:
-        - lists
-      summary: Get playlists
-      description: Get all playlists
-      operationId: getPlaylists
+        - billboard
+      summary: Get billboard
+      description: Get all billboard
+      operationId: getBillboard
       parameters:
         - name: order
           in: query
@@ -224,13 +186,13 @@ paths:
               - '-name'
         - name: isEmpty
           in: query
-          description: Filter playlists with no songs
+          description: Filter billboard with no films
           required: false
           schema:
             type: boolean
         - name: name
           in: query
-          description: Filter playlists by name
+          description: Filter billboard by name
           required: false
           schema:
             type: string
@@ -252,7 +214,7 @@ paths:
                       type: string
                     description:
                       type: string
-                    songs:
+                    films:
                       type: array
                       items:
                         type: object
@@ -263,30 +225,30 @@ paths:
                             type: string
                           title:
                             type: string
-                          artist:
+                          director:
                             type: string
-                          album:
+                          genre:
                             type: string
-                          year:
+                          release:
                             type: string
                   example:
                     id: p5
                     name: Favourites
-                    description: My favourite songs
-                    songs:
-                      - id: s1
-                        title: Rolling in the Deep
-                        artist: Adele
-                        album: '21'
-                        year: '2011'
+                    description: My favourite films
+                    films:
+                      - id: f1
+                        title: Las tortugas ninjas
+                        director: Wilfredo
+                        genre: 'ACCION'
+                        release: '15, 10, 2021'
         '400':
           description: Bad request
     put:
       tags:
-        - lists
-      summary: Update a playlist
-      description: Update a playlist
-      operationId: updatePlaylist
+        - billboard
+      summary: Update a billboard
+      description: Update a billboard
+      operationId: updateBillboard
       requestBody:
         content:
           application/json:
@@ -300,7 +262,7 @@ paths:
                   type: string
                 description:
                   type: string
-                songs:
+                films:
                   type: array
                   items:
                     type: object
@@ -311,47 +273,47 @@ paths:
                         type: string
                       title:
                         type: string
-                      artist:
+                      director:
                         type: string
-                      album:
+                      genre:
                         type: string
-                      year:
+                      release:
                         type: string
               example:
                 id: p5
                 name: Favourites
-                description: My favourite songs
-                songs:
-                  - id: s1
-                    title: Rolling in the Deep
-                    artist: Adele
-                    album: '21'
-                    year: '2011'
-        description: Playlist to update
+                description: My favourite films
+                films:
+                  - id: f1
+                    title: Las tortugas ninjas
+                    director: Wilfredo
+                    genre: 'ACCION'
+                    release: '15, 10, 2021'
+        description: Billboard to update
       responses:
         '204':
-          description: Playlist updated
+          description: Billboard updated
         '400':
           description: Bad request
         '404':
-          description: Playlist not found
-  '/lists/{id}':
+          description: Billboard not found
+  '/billboard/{id}':
     get:
       tags:
-        - lists
-      summary: Get a playlist
-      description: Get a playlist
-      operationId: getPlaylist
+        - billboard
+      summary: Get a billboard
+      description: Get a billboard
+      operationId: getBillboard
       parameters:
         - name: id
           in: path
-          description: Id of the playlist
+          description: Id of the billboard
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: Playlist found
+          description: Billboard found
           content:
             application/json:
               schema:
@@ -364,7 +326,7 @@ paths:
                     type: string
                   description:
                     type: string
-                  songs:
+                  films:
                     type: array
                     items:
                       type: object
@@ -375,52 +337,52 @@ paths:
                           type: string
                         title:
                           type: string
-                        artist:
+                        director:
                           type: string
-                        album:
+                        genre:
                           type: string
-                        year:
+                        release:
                           type: string
                 example:
                   id: p5
                   name: Favourites
-                  description: My favourite songs
-                  songs:
-                    - id: s1
-                      title: Rolling in the Deep
-                      artist: Adele
-                      album: '21'
-                      year: '2011'
+                  description: My favourite films
+                  films:
+                    - id: f1
+                      title: Las tortugas ninjas
+                      director: Wilfredo
+                      genre: 'ACCION'
+                      release: '15, 10, 2021'
         '404':
-          description: Playlist not found
-  '/lists/{playlistId}/{songId}':
+          description: Billboard not found
+  '/billboard/{billboardId}/{filmId}':
     post:
       tags:
-        - lists
-      summary: Add song to playlist
-      description: Add song to playlist
-      operationId: addSongToPlaylist
+        - billboard
+      summary: Add film to billboard
+      description: Add film to billboard
+      operationId: addFilmToBillboard
       requestBody:
         content:
           text/plain:
             schema:
               type: string
       parameters:
-        - name: playlistId
+        - name: billboardId
           in: path
-          description: Id of the playlist
+          description: Id of the billboard
           required: true
           schema:
             type: string
-        - name: songId
+        - name: filmId
           in: path
-          description: Id of the song
+          description: Id of the film
           required: true
           schema:
             type: string
       responses:
         '201':
-          description: Song added to playlist
+          description: Film added to billboard
           content:
             application/json:
               schema:
@@ -433,7 +395,7 @@ paths:
                     type: string
                   description:
                     type: string
-                  songs:
+                  films:
                     type: array
                     items:
                       type: object
@@ -444,47 +406,47 @@ paths:
                           type: string
                         title:
                           type: string
-                        artist:
+                        director:
                           type: string
-                        album:
+                        genre:
                           type: string
-                        year:
+                        release:
                           type: string
                 example:
                   id: p5
                   name: Favourites
-                  description: My favourite songs
-                  songs:
-                    - id: s1
-                      title: Rolling in the Deep
-                      artist: Adele
-                      album: '21'
-                      year: '2011'
+                  description: My favourite films
+                  films:
+                    - id: f1
+                      title: Las tortugas ninjas
+                      director: Wilfredo
+                      genre: 'ACCION'
+                      release: '15, 10, 2021'
         '400':
           description: Bad request
         '404':
-          description: Playlist or song not found
+          description: Billboard or film not found
     delete:
       tags:
-        - lists
-      summary: Delete song from playlist
-      description: Delete song from playlist
-      operationId: deleteSongFromPlayist
+        - billboard
+      summary: Delete film from billboard
+      description: Delete film from billboard
+      operationId: deleteFilmFromPlayist
       parameters:
-        - name: playlistId
+        - name: billboardId
           in: path
-          description: Id of the playlist
+          description: Id of the billboard
           required: true
           schema:
             type: string
-        - name: songId
+        - name: filmId
           in: path
-          description: Id of the song
+          description: Id of the film
           required: true
           schema:
             type: string
       responses:
         '204':
-          description: Song deleted from playlist
+          description: Film deleted from billboard
         '404':
-          description: Playlist or song not found
+          description: Billboard or film not found
