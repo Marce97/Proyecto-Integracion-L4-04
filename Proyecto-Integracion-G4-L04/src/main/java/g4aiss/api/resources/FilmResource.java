@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -169,6 +170,18 @@ public class FilmResource {
 			oldfilm.setRelease(film.getRelease());
 		
 		return Response.noContent().build();
+	}
+	
+	@DELETE
+	@Path("/{id}")
+	public Response removeFilm(@PathParam("id") String filmId) {
+		Film toberemoved=repository.getFilm(filmId);
+        if (toberemoved == null)
+            throw new NotFoundException("The film with id="+ filmId +" was not found");
+        else
+            repository.deleteFilm(filmId);
+
+        return Response.noContent().build();
 	}
 
 }
