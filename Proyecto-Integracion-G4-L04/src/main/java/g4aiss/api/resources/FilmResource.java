@@ -12,13 +12,6 @@ import javax.ws.rs.QueryParam;
 
 import org.jboss.resteasy.spi.BadRequestException;
 
-import aiss.api.resources.ComparatorAlbumSong;
-import aiss.api.resources.ComparatorAlbumSongReversed;
-import aiss.api.resources.ComparatorArtistSong;
-import aiss.api.resources.ComparatorArtistSongReversed;
-import aiss.api.resources.ComparatorYearSong;
-import aiss.api.resources.ComparatorYearSongReversed;
-import aiss.model.Song;
 import g4aiss.model.Film;
 import g4aiss.model.repository.BillboardRepository;
 import g4aiss.model.repository.MapBillboardRepository;
@@ -77,11 +70,11 @@ public class FilmResource {
 				Collections.sort(result, new ComparatorGenreFilmReversed());
 			}
 			
-			else if(order.equals("genre")) {
-				Collections.sort(result, new ComparatorGenreFilm());
+			else if(order.equals("release")) {
+				Collections.sort(result, new ComparatorReleaseFilm());
 			}
-			else if(order.equals("-genre")) {
-				Collections.sort(result, new ComparatorGenreFilmReversed());
+			else if(order.equals("-release")) {
+				Collections.sort(result, new ComparatorReleaseFilmReversed());
 			}
 			
 			else {
