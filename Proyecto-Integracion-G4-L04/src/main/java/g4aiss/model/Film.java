@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 public class Film {
 	
+	private String id;
 	private String title;
 	private String director;
 	private Duration duration;
@@ -16,12 +17,28 @@ public class Film {
 	}
 
 	public Film(String title, String director, Duration duration, String genre, LocalTime release) {
-		super();
 		this.title = title;
 		this.director = director;
 		this.duration = duration;
 		this.genre = genre;
 		this.release = release;
+	}
+	
+	public Film(String id, String title, String director, Duration duration, String genre, LocalTime release) {
+		this.id = id;
+		this.title = title;
+		this.director = director;
+		this.duration = duration;
+		this.genre = genre;
+		this.release = release;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
