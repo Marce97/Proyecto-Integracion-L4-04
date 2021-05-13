@@ -39,7 +39,7 @@ public class MapBillboardRepository implements BillboardRepository{
 		NinjaTurtles.setDirector("Wilfredo");
 		NinjaTurtles.setDuration(Duration.ofMinutes(140));
 		NinjaTurtles.setGenre("Acción");
-		NinjaTurtles.setRelease(LocalDate.of(15, 10, 2021));
+		NinjaTurtles.setRelease(LocalDate.of(2021, 10, 5));
 		addFilm(NinjaTurtles);
 		
 		Film GodzillaVsKong=new Film();
@@ -47,7 +47,7 @@ public class MapBillboardRepository implements BillboardRepository{
 		GodzillaVsKong.setDirector("Leonardo");
 		GodzillaVsKong.setDuration(Duration.ofMinutes(130));
 		GodzillaVsKong.setGenre("Acción");
-		GodzillaVsKong.setRelease(LocalDate.of(6, 4, 2021));
+		GodzillaVsKong.setRelease(LocalDate.of(2021, 4, 20));
 		addFilm(GodzillaVsKong);
 		
 		Film Titanic=new Film();
@@ -55,7 +55,7 @@ public class MapBillboardRepository implements BillboardRepository{
 		Titanic.setDirector("Annabel");
 		Titanic.setDuration(Duration.ofMinutes(200));
 		Titanic.setGenre("Romance");
-		Titanic.setRelease(LocalDate.of(4, 6, 1995));
+		Titanic.setRelease(LocalDate.of(1995, 12, 28));
 		addFilm(Titanic);
 		
 		Film ElSeñorDeLosAnillos=new Film();
@@ -63,7 +63,7 @@ public class MapBillboardRepository implements BillboardRepository{
 		ElSeñorDeLosAnillos.setDirector("Peter Jackson");
 		ElSeñorDeLosAnillos.setDuration(Duration.ofMinutes(210));
 		ElSeñorDeLosAnillos.setGenre("Aventura");
-		ElSeñorDeLosAnillos.setRelease(LocalDate.of(15, 10, 1997));
+		ElSeñorDeLosAnillos.setRelease(LocalDate.of(1997, 4, 17));
 		addFilm(ElSeñorDeLosAnillos);
 		
 		Film Avatar=new Film();
@@ -71,7 +71,7 @@ public class MapBillboardRepository implements BillboardRepository{
 		Avatar.setDirector("Isaac");
 		Avatar.setDuration(Duration.ofMinutes(210));
 		Avatar.setGenre("Fanatasía");
-		Avatar.setRelease(LocalDate.of(7, 1, 2004));
+		Avatar.setRelease(LocalDate.of(2004, 7, 17));
 		addFilm(Avatar);
 		
 		// Create Billboard
