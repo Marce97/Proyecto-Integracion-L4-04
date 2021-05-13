@@ -1,6 +1,7 @@
 package g4aiss.model;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Film {
@@ -12,13 +13,13 @@ public class Film {
 	private String director;
 	private Duration duration;
 	private String genre;
-	private LocalTime release;
+	private LocalDate release;
 	
 	public Film() {
 		super();
 	}
 
-	public Film(String title, String director, Duration duration, String genre, LocalTime release) {
+	public Film(String title, String director, Duration duration, String genre, LocalDate release) {
 		this.title = title;
 		this.director = director;
 		this.duration = duration;
@@ -26,7 +27,7 @@ public class Film {
 		this.release = release;
 	}
 	
-	public Film(String id, String title, String director, Duration duration, String genre, LocalTime release) {
+	public Film(String id, String title, String director, Duration duration, String genre, LocalDate release) {
 		this.id = id;
 		this.title = title;
 		this.director = director;
@@ -75,11 +76,11 @@ public class Film {
 		this.genre = genre;
 	}
 
-	public LocalTime getRelease() {
+	public LocalDate getRelease() {
 		return release;
 	}
 
-	public void setRelease(LocalTime release) {
+	public void setRelease(LocalDate release) {
 		this.release = release;
 	}
 	
