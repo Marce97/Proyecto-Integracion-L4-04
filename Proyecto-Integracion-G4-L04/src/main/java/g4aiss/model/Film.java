@@ -78,9 +78,4 @@ public class Film {
 	public void setRelease(String release) {
 		this.release = release;
 	}
-	
-	
-	
-	
-
 }
