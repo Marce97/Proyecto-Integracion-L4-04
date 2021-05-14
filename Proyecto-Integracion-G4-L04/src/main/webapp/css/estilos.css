@@ -63,3 +63,19 @@ body{
 .enlace{
 	color: red;
 }
+.foto_creator{
+	width:300px;
+	height: auto;
+	margin-top:50px;
+	
+}
+.texto_creator{
+	font-family: Times, Times New Roman, serif;
+	font-size:large;
+	font-weight:200px;
+	
+}
+#columna_foto{
+	justify-content:center;
+	text-align:center;
+}
