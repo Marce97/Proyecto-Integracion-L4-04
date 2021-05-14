@@ -153,9 +153,7 @@ paths:
                   genre: 'ACCION'
                   release: '15, 10, 2021'
         '400':
-          description: Bad request
-  '/films':
-  
+          description: Bad request  
     put:
       tags:
         - films
