@@ -25,7 +25,7 @@ import g4aiss.model.Film;
 import g4aiss.model.repository.BillboardRepository;
 import g4aiss.model.repository.MapBillboardRepository;
 	
-	@Path("/billboard")
+	@Path("/billboards")
 	public class BillboardResource {
 
 		public static BillboardResource _instance=null;
@@ -116,7 +116,7 @@ import g4aiss.model.repository.MapBillboardRepository;
 	        return Response.noContent().build();
 		}
 		@POST	
-		@Path("/{playlistId}/{songId}")
+		@Path("/{billboardId}/{filmId}")
 		@Consumes("text/plain")
 		@Produces("application/json")
 		public Response addFilm(@Context UriInfo uriInfo,@PathParam("billboardId") String billboardId, @PathParam("filmId") String filmId)
@@ -146,7 +146,7 @@ import g4aiss.model.repository.MapBillboardRepository;
 		
 		
 		@DELETE
-		@Path("/{playlistId}/{songId}")
+		@Path("/{billboardId}/{filmId}")
 		public Response removeFilm(@PathParam("billboardId") String billboardId, @PathParam("filmId") String filmId) {
 			Billboard billboard = repository.getBillboard(billboardId);
 			Film film = repository.getFilm(filmId);
