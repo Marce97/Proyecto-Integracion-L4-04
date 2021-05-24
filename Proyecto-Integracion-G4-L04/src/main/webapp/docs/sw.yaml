@@ -11,6 +11,7 @@ info:
   version: 1.0.0
 servers:
 - url: http://localhost:8090/api/
+- url: https://proyectointegracion2021l4-04.ew.r.appspot.com/api/
 tags:
 - name: films
   description: Films
@@ -35,13 +36,13 @@ paths:
           type: string
           enum:
           - genre
-          - genre
+          - -genre
           - director
-          - director
+          - -director
           - release
-          - release
+          - -release
           - duration
-          - duration
+          - -duration
       - name: q
         in: query
         description: Query to filter
@@ -123,11 +124,82 @@ paths:
         "400":
           description: Bad request
   /film/{id}:
+    get:
+      tags:
+      - films
+      summary: Get film with id
+      description: Get film with id
+      operationId: getFilmsId
+      parameters:
+      - name: id
+        in: path
+        description: Id of the film
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: Order results by genre, director or release
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - genre
+          - -genre
+          - director
+          - -director
+          - release
+          - -release
+          - duration
+          - -duration
+      - name: q
+        in: query
+        description: Query to filter
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of results
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Offset of the results
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Bad request
     delete:
       tags:
       - films
-      summary: Delete film
-      description: Delete film
+      summary: Delete film with id
+      description: Delete film with id
       operationId: deleteFilm
       parameters:
       - name: id
@@ -212,7 +284,7 @@ paths:
     get:
       tags:
       - billboard
-      summary: Get a billboard
+      summary: Get billboard with id
       description: Get a billboard
       operationId: getBillboardId
       parameters:
@@ -233,12 +305,64 @@ paths:
                 $ref: '#/components/schemas/inline_response_200_2'
         "404":
           description: Billboard not found
+          
+  /billboard/{billboardId}:
+    post:
+        tags:
+        - billboard
+        summary: Create billboard with id
+        description: Create billboard with id
+        operationId: addBillboard
+        parameters:
+        - name: billboardId
+          in: path
+          description: Id of the billboard
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        requestBody:
+          content:
+            text/plain:
+              schema:
+                type: string
+        responses:
+          "201":
+            description: billboard added
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/inline_response_200_2'
+          "400":
+            description: Bad request
+    delete:
+      tags:
+      - billboard
+      summary: Delete billboard with id
+      description: Delete billboard with id
+      operationId: deleteBillboard
+      parameters:
+      - name: billboardId
+        in: path
+        description: Id of the billboard
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Film deleted from billboard
+        "404":
+          description: Billboard or film not found
+  
   /billboard/{billboardId}/{filmId}:
     post:
       tags:
       - billboard
-      summary: Add film to billboard
-      description: Add film to billboard
+      summary: Add film to billboard with id
+      description: Add film to billboard with id
       operationId: addFilmToBillboard
       parameters:
       - name: billboardId
@@ -276,8 +400,8 @@ paths:
     delete:
       tags:
       - billboard
-      summary: Delete film from billboard
-      description: Delete film from billboard
+      summary: Delete film from billboard with id
+      description: Delete film from billboard with id
       operationId: deleteFilmFromPlayist
       parameters:
       - name: billboardId
