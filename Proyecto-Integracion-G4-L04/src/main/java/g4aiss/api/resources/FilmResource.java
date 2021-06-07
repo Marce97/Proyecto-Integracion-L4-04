@@ -51,11 +51,13 @@ public class FilmResource {
 	public Collection<Film> getAll(@QueryParam("order") String order, @QueryParam("q") String q,
 			@QueryParam("offset") Integer offset, @QueryParam("limit") Integer limit){
 		
+		// por ejemplo https://proyectointegracion2021l4-04.ew.r.appspot.com/api/films?order=-director&limit=2&offset=1
+		
 		List<Film> result = new ArrayList<Film>();
 		
-		for(Film song: repository.getAllFilms()) {
-			if(q == null || song.getTitle().contains(q) || song.getDirector().contains(q) || song.getGenre().contains(q)) {
-				result.add(song);
+		for(Film film: repository.getAllFilms()) {
+			if(q == null || film.getTitle().contains(q) || film.getDirector().contains(q) || film.getGenre().contains(q)) {
+				result.add(film);
 			}
 		}
 		
@@ -131,7 +133,7 @@ public class FilmResource {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response addSong(@Context UriInfo uriInfo, Film film) {
+	public Response addfilm(@Context UriInfo uriInfo, Film film) {
 		if(film.getTitle() == null || "".equals(film.getTitle())) {
 			throw new BadRequestException("The name of the film must not be null");
 		}
@@ -147,7 +149,7 @@ public class FilmResource {
 	
 	@PUT
 	@Consumes("application/json")
-	public Response updateSong(Film film) {
+	public Response updatefilm(Film film) {
 		Film oldfilm = repository.getFilm(film.getId());
 		if (oldfilm == null) {
 			throw new NotFoundException("The playlist with id="+ film.getId() +" was not found");			
